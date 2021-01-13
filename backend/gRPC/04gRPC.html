@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Client&amp;Server Stream</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="记录记录学到的，用到的">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="google-site-verification" content="Ld_AEWr30siza2LmmZ12csitRGsSj9gqqEAch0UXkTc">
+    
+    <link rel="preload" href="/assets/css/0.styles.90a62652.css" as="style"><link rel="preload" href="/assets/js/app.d58cb2a0.js" as="script"><link rel="preload" href="/assets/js/2.a2eaf130.js" as="script"><link rel="preload" href="/assets/js/22.2bc84a48.js" as="script"><link rel="preload" href="/assets/js/3.f31d052a.js" as="script"><link rel="prefetch" href="/assets/js/10.6bcab2c8.js"><link rel="prefetch" href="/assets/js/11.dc0197f3.js"><link rel="prefetch" href="/assets/js/12.4ab5a7f5.js"><link rel="prefetch" href="/assets/js/13.c7a0efab.js"><link rel="prefetch" href="/assets/js/14.122dc819.js"><link rel="prefetch" href="/assets/js/15.6fcb116d.js"><link rel="prefetch" href="/assets/js/16.d3005a89.js"><link rel="prefetch" href="/assets/js/17.b3aad75e.js"><link rel="prefetch" href="/assets/js/18.95fab2a2.js"><link rel="prefetch" href="/assets/js/19.c24b1f82.js"><link rel="prefetch" href="/assets/js/20.559b0cd3.js"><link rel="prefetch" href="/assets/js/21.92f879ac.js"><link rel="prefetch" href="/assets/js/23.96e98b31.js"><link rel="prefetch" href="/assets/js/24.3e4659f4.js"><link rel="prefetch" href="/assets/js/25.6e32e13d.js"><link rel="prefetch" href="/assets/js/26.dbe3196b.js"><link rel="prefetch" href="/assets/js/27.a7407f84.js"><link rel="prefetch" href="/assets/js/28.8e9c4f31.js"><link rel="prefetch" href="/assets/js/29.fe7b9c37.js"><link rel="prefetch" href="/assets/js/30.548b5040.js"><link rel="prefetch" href="/assets/js/31.23d47226.js"><link rel="prefetch" href="/assets/js/32.85191567.js"><link rel="prefetch" href="/assets/js/33.c6b146f7.js"><link rel="prefetch" href="/assets/js/34.cb5228a1.js"><link rel="prefetch" href="/assets/js/35.b6c4fa93.js"><link rel="prefetch" href="/assets/js/36.86a8c5ba.js"><link rel="prefetch" href="/assets/js/37.c4bb9812.js"><link rel="prefetch" href="/assets/js/38.30f9264a.js"><link rel="prefetch" href="/assets/js/39.6a40403d.js"><link rel="prefetch" href="/assets/js/4.a89e093a.js"><link rel="prefetch" href="/assets/js/40.3cb39a67.js"><link rel="prefetch" href="/assets/js/41.0998ab93.js"><link rel="prefetch" href="/assets/js/42.d1dfa35a.js"><link rel="prefetch" href="/assets/js/43.0253544b.js"><link rel="prefetch" href="/assets/js/44.ba1a0cdb.js"><link rel="prefetch" href="/assets/js/45.f5b14025.js"><link rel="prefetch" href="/assets/js/46.70c99fa8.js"><link rel="prefetch" href="/assets/js/47.329a3b82.js"><link rel="prefetch" href="/assets/js/5.1f4073b2.js"><link rel="prefetch" href="/assets/js/6.dfa810f9.js"><link rel="prefetch" href="/assets/js/7.170c203a.js"><link rel="prefetch" href="/assets/js/8.9e8bf44a.js"><link rel="prefetch" href="/assets/js/9.7d1d6033.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.90a62652.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/favicon.ico" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link router-link-active">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link router-link-active">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>gRPC</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/backend/gRPC/" aria-current="page" class="sidebar-link">首页</a></li><li><a href="/backend/gRPC/00gRPC.html" class="sidebar-link">常规用法</a></li><li><a href="/backend/gRPC/01gRPC.html" class="sidebar-link">一元消息</a></li><li><a href="/backend/gRPC/02gRPC.html" class="sidebar-link">Server Stream</a></li><li><a href="/backend/gRPC/03gRPC.html" class="sidebar-link">Client Stream</a></li><li><a href="/backend/gRPC/04gRPC.html" aria-current="page" class="active sidebar-link">Client&amp;Server Stream</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/backend/gRPC/04gRPC.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/backend/gRPC/04gRPC.html#正文" class="sidebar-link">正文</a></li></ul></li><li><a href="/backend/gRPC/05gRPC.html" class="sidebar-link">需求变更过程</a></li><li><a href="/backend/gRPC/06gRPC.html" class="sidebar-link">日志和异常</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <blockquote><p>继续完成未完成协议</p> <div class="language-protobuf extra-class"><pre class="language-protobuf"><code><span class="token keyword">rpc</span> <span class="token function">SaveAll</span><span class="token punctuation">(</span><span class="token keyword">stream</span> <span class="token class-name">EmployeeRequest</span><span class="token punctuation">)</span> <span class="token keyword">returns</span> <span class="token punctuation">(</span><span class="token keyword">stream</span> <span class="token class-name">EmployeeResponse</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div></blockquote> <h2 id="正文"><a href="#正文" class="header-anchor">#</a> 正文</h2> <h3 id="client"><a href="#client" class="header-anchor">#</a> Client</h3> <div class="language-csharp extra-class"><pre class="language-csharp"><code><span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task</span> <span class="token function">SaveAllAsync</span><span class="token punctuation">(</span><span class="token class-name">EmployeeService<span class="token punctuation">.</span>EmployeeServiceClient</span> client<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> employees <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Employee<span class="token punctuation">&gt;</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Employee</span>
+        <span class="token punctuation">{</span>
+            Id <span class="token operator">=</span> <span class="token number">111</span><span class="token punctuation">,</span>
+            FirstName <span class="token operator">=</span> <span class="token string">&quot;Monica&quot;</span><span class="token punctuation">,</span>
+            LastName <span class="token operator">=</span> <span class="token string">&quot;Geller&quot;</span><span class="token punctuation">,</span>
+            Salary <span class="token operator">=</span> <span class="token number">7890.1f</span><span class="token punctuation">,</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+        <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Employee</span>
+        <span class="token punctuation">{</span>
+            No <span class="token operator">=</span> <span class="token number">222</span><span class="token punctuation">,</span>
+            FirstName <span class="token operator">=</span> <span class="token string">&quot;Joey&quot;</span><span class="token punctuation">,</span>
+            LastName <span class="token operator">=</span> <span class="token string">&quot;Tribbiani&quot;</span><span class="token punctuation">,</span>
+            Salary <span class="token operator">=</span> <span class="token number">500</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+
+    <span class="token class-name"><span class="token keyword">var</span></span> call <span class="token operator">=</span> client<span class="token punctuation">.</span><span class="token function">SaveAll</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//因为两端都是用流的方式传输，所以需要获取两个流示例</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> requestStream <span class="token operator">=</span> call<span class="token punctuation">.</span>RequestStream<span class="token punctuation">;</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> responseStream <span class="token operator">=</span> call<span class="token punctuation">.</span>ResponseStream<span class="token punctuation">;</span>
+
+    <span class="token comment">//创建一个响应流Task,用于接收服务器端返回的消息</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> responseTask <span class="token operator">=</span> Task<span class="token punctuation">.</span><span class="token function">Run</span><span class="token punctuation">(</span><span class="token keyword">async</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+                                <span class="token punctuation">{</span>
+                                    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token keyword">await</span> responseStream<span class="token punctuation">.</span><span class="token function">MoveNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+                                    <span class="token punctuation">{</span>
+                                        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token interpolation-string"><span class="token string">$&quot;Saved:</span><span class="token interpolation"><span class="token punctuation">{</span><span class="token expression language-csharp">responseStream<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>Employee</span><span class="token punctuation">}</span></span><span class="token string">&quot;</span></span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                                    <span class="token punctuation">}</span>
+                                <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment">//像之前一样，向请求流中写入数据</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> employee <span class="token keyword">in</span> employees<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">await</span> requestStream<span class="token punctuation">.</span><span class="token function">WriteAsync</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">EmployeeRequest</span>
+                                       <span class="token punctuation">{</span>
+                                           Employee <span class="token operator">=</span> employee
+                                       <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment">//顺序不可调换，否则会一直收不到服务器端返回的消息</span>
+    <span class="token keyword">await</span> requestStream<span class="token punctuation">.</span><span class="token function">CompleteAsync</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">await</span> responseTask<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="server"><a href="#server" class="header-anchor">#</a> Server</h3> <div class="language-csharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">override</span> <span class="token keyword">async</span> <span class="token return-type class-name">Task</span> <span class="token function">SaveAll</span><span class="token punctuation">(</span><span class="token class-name">IAsyncStreamReader<span class="token punctuation">&lt;</span>EmployeeRequest<span class="token punctuation">&gt;</span></span> requestStream<span class="token punctuation">,</span>
+                                   <span class="token class-name">IServerStreamWriter<span class="token punctuation">&lt;</span>EmployeeResponse<span class="token punctuation">&gt;</span></span> responseStream<span class="token punctuation">,</span> <span class="token class-name">ServerCallContext</span> context<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">while</span> <span class="token punctuation">(</span><span class="token keyword">await</span> requestStream<span class="token punctuation">.</span><span class="token function">MoveNext</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token class-name"><span class="token keyword">var</span></span> employee <span class="token operator">=</span> requestStream<span class="token punctuation">.</span>Current<span class="token punctuation">.</span>Employee<span class="token punctuation">;</span>
+        <span class="token keyword">lock</span> <span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            InMemoryData<span class="token punctuation">.</span>Employees<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span>employee<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">await</span> responseStream<span class="token punctuation">.</span><span class="token function">WriteAsync</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">EmployeeResponse</span>
+                                        <span class="token punctuation">{</span>
+                                            Employee <span class="token operator">=</span> employee
+                                        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span><span class="token string">&quot;Employees:&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">foreach</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">var</span></span> employee <span class="token keyword">in</span> InMemoryData<span class="token punctuation">.</span>Employees<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        Console<span class="token punctuation">.</span><span class="token function">WriteLine</span><span class="token punctuation">(</span>employee<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="运行"><a href="#运行" class="header-anchor">#</a> 运行</h3> <p><img src="https://i.loli.net/2021/01/06/L6UGjbr7Il2kPJq.png" alt="image-20210106233318527.png"></p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io/edit/master/docs/backend/gRPC/04gRPC.md" target="_blank" rel="noopener noreferrer">编辑文档</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/backend/gRPC/03gRPC.html" class="prev">
+        Client Stream
+      </a></span> <span class="next"><a href="/backend/gRPC/05gRPC.html">
+        需求变更过程
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.d58cb2a0.js" defer></script><script src="/assets/js/2.a2eaf130.js" defer></script><script src="/assets/js/22.2bc84a48.js" defer></script><script src="/assets/js/3.f31d052a.js" defer></script>
+  </body>
+</html>

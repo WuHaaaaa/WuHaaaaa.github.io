@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>路由概念，底层实现</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="记录记录学到的，用到的">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="google-site-verification" content="Ld_AEWr30siza2LmmZ12csitRGsSj9gqqEAch0UXkTc">
+    
+    <link rel="preload" href="/assets/css/0.styles.90a62652.css" as="style"><link rel="preload" href="/assets/js/app.d58cb2a0.js" as="script"><link rel="preload" href="/assets/js/2.a2eaf130.js" as="script"><link rel="preload" href="/assets/js/16.d3005a89.js" as="script"><link rel="preload" href="/assets/js/3.f31d052a.js" as="script"><link rel="prefetch" href="/assets/js/10.6bcab2c8.js"><link rel="prefetch" href="/assets/js/11.dc0197f3.js"><link rel="prefetch" href="/assets/js/12.4ab5a7f5.js"><link rel="prefetch" href="/assets/js/13.c7a0efab.js"><link rel="prefetch" href="/assets/js/14.122dc819.js"><link rel="prefetch" href="/assets/js/15.6fcb116d.js"><link rel="prefetch" href="/assets/js/17.b3aad75e.js"><link rel="prefetch" href="/assets/js/18.95fab2a2.js"><link rel="prefetch" href="/assets/js/19.c24b1f82.js"><link rel="prefetch" href="/assets/js/20.559b0cd3.js"><link rel="prefetch" href="/assets/js/21.92f879ac.js"><link rel="prefetch" href="/assets/js/22.2bc84a48.js"><link rel="prefetch" href="/assets/js/23.96e98b31.js"><link rel="prefetch" href="/assets/js/24.3e4659f4.js"><link rel="prefetch" href="/assets/js/25.6e32e13d.js"><link rel="prefetch" href="/assets/js/26.dbe3196b.js"><link rel="prefetch" href="/assets/js/27.a7407f84.js"><link rel="prefetch" href="/assets/js/28.8e9c4f31.js"><link rel="prefetch" href="/assets/js/29.fe7b9c37.js"><link rel="prefetch" href="/assets/js/30.548b5040.js"><link rel="prefetch" href="/assets/js/31.23d47226.js"><link rel="prefetch" href="/assets/js/32.85191567.js"><link rel="prefetch" href="/assets/js/33.c6b146f7.js"><link rel="prefetch" href="/assets/js/34.cb5228a1.js"><link rel="prefetch" href="/assets/js/35.b6c4fa93.js"><link rel="prefetch" href="/assets/js/36.86a8c5ba.js"><link rel="prefetch" href="/assets/js/37.c4bb9812.js"><link rel="prefetch" href="/assets/js/38.30f9264a.js"><link rel="prefetch" href="/assets/js/39.6a40403d.js"><link rel="prefetch" href="/assets/js/4.a89e093a.js"><link rel="prefetch" href="/assets/js/40.3cb39a67.js"><link rel="prefetch" href="/assets/js/41.0998ab93.js"><link rel="prefetch" href="/assets/js/42.d1dfa35a.js"><link rel="prefetch" href="/assets/js/43.0253544b.js"><link rel="prefetch" href="/assets/js/44.ba1a0cdb.js"><link rel="prefetch" href="/assets/js/45.f5b14025.js"><link rel="prefetch" href="/assets/js/46.70c99fa8.js"><link rel="prefetch" href="/assets/js/47.329a3b82.js"><link rel="prefetch" href="/assets/js/5.1f4073b2.js"><link rel="prefetch" href="/assets/js/6.dfa810f9.js"><link rel="prefetch" href="/assets/js/7.170c203a.js"><link rel="prefetch" href="/assets/js/8.9e8bf44a.js"><link rel="prefetch" href="/assets/js/9.7d1d6033.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.90a62652.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/favicon.ico" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link router-link-active">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link router-link-active">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>dot-net-mvc5</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/backend/dot-net-mvc5/" aria-current="page" class="sidebar-link">首页</a></li><li><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html" class="sidebar-link">控制器、试图、模型</a></li><li><a href="/backend/dot-net-mvc5/02asp-dot-net-mvc5.html" class="sidebar-link">表单和HTML辅助方法</a></li><li><a href="/backend/dot-net-mvc5/03asp-dot-net-mvc5.html" class="sidebar-link">数据注解，验证</a></li><li><a href="/backend/dot-net-mvc5/04asp-dot-net-mvc5.html" class="sidebar-link">安全性、权限验证、角色成员分配</a></li><li><a href="/backend/dot-net-mvc5/05asp-dot-net-mvc5.html" class="sidebar-link">Ajax，jQuery插件用法</a></li><li><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html" aria-current="page" class="active sidebar-link">路由概念，底层实现</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html#正文" class="sidebar-link">正文</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html#路由方法" class="sidebar-link">路由方法</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html#笔记" class="sidebar-link">笔记</a></li></ul></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <blockquote><p>本章介绍路由特性，以及路由概念，底层实现等，需要好好看看，本章对应书中第九章</p></blockquote> <h2 id="正文"><a href="#正文" class="header-anchor">#</a> 正文</h2> <p>高质量<code>URL</code>应该满足以下几点要求：</p> <ul><li>域名便于记忆、拼写</li> <li>简短</li> <li>便于输入</li> <li>可以反映出站点结构</li> <li>“可破解的”，用户通过移除<code>URL</code>尾部，可以进一步达到更高层次的信息体系结构</li> <li>持久、不能改变</li></ul> <h2 id="路由方法"><a href="#路由方法" class="header-anchor">#</a> 路由方法</h2> <h3 id="定义特性路由"><a href="#定义特性路由" class="header-anchor">#</a> 定义特性路由</h3> <p>启用特性路由，<code>~/App_Start/RouteConfig.cs</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">RegisterRoutes</span><span class="token punctuation">(</span><span class="token class-name">RouteCollection</span> routes<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//注释掉之前的，我们开始使用特性路由</span>
+    <span class="token comment">//routes.IgnoreRoute(&quot;{resource}.axd/{*pathInfo}&quot;);</span>
+
+    <span class="token comment">//routes.MapRoute(</span>
+    <span class="token comment">//    name: &quot;Default&quot;,</span>
+    <span class="token comment">//    url: &quot;{controller}/{action}/{id}&quot;,</span>
+    <span class="token comment">//    defaults: new { controller = &quot;Home&quot;, action = &quot;Index&quot;, id = UrlParameter.Optional }</span>
+    <span class="token comment">//);</span>
+	
+    routes<span class="token punctuation">.</span><span class="token function">MapMvcAttributeRoutes</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="最简单的特性路由"><a href="#最简单的特性路由" class="header-anchor">#</a> 最简单的特性路由</h3> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	<span class="token comment">//当使用特性路由后，其他未定义的路由都将不能使用</span>
+    <span class="token comment">//这个对应的url：localhost:4033/about</span>
+    <span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;about&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your contact page.&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="使用多个特性路由"><a href="#使用多个特性路由" class="header-anchor">#</a> 使用多个特性路由</h3> <blockquote><p><strong>传入路由特性的字符串叫模板，它就是一个模式匹配规则。决定了这个路由是否适用传入的请求。只有当<code>URL</code>路径具有完全相同的字符串时，路由才会与之匹配。</strong></p></blockquote> <p>这样的好处是我们可以通过定义的多个路由访问指定的<code>URL</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span> <span class="token comment">//localhost:1234</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment">//localhost:1234/home</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;home/index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span> <span class="token comment">//localhost:1234/home/index</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="使用动态的特性路由"><a href="#使用动态的特性路由" class="header-anchor">#</a> 使用动态的特性路由</h3> <blockquote><p><strong>当特性路由匹配并运行操作方法时，模型绑定会使路由的路由参数为同名的方法参数填充值</strong></p></blockquote> <p>上面的路由是静态的，如果使用动态的，例如：在<code>URL</code>中包含记录的<code>ID</code>，则需要添加路由参数</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//http://localhost:3150/contract/12</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;contract/{id}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们可以在方法中接收多个参数，每个参数相当于一个占位</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//两种url，接收的参数都相同，只是一个占位符</span>
+<span class="token comment">//http://localhost:3150/contract/2020/01/01</span>
+<span class="token comment">//http://localhost:3150/contract/foo/bar/baz</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;contract/{year}/{month}/{day}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> year<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> month<span class="token punctuation">,</span> <span class="token class-name"><span class="token keyword">string</span></span> day<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> year <span class="token operator">+</span> month <span class="token operator">+</span> day<span class="token punctuation">;</span>
+    <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="使用控制器类的特性路由"><a href="#使用控制器类的特性路由" class="header-anchor">#</a> 使用控制器类的特性路由</h3> <p>很多时候，同样的控制器类下面，多个方法都是使用的相似的路由模板</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/index&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/about&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/contract&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>我们可以使用控制器的特性路由，将前面的<code>home</code>省略掉，避免代码重复，便于维护</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//action可以作为任意操作名称的占位符</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;home/{action}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//http://localhost:3150/home/index</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>有时候，某些操作具有其他的操作稍微不同的路由，我们可以将最通用的提取放到控制器上，然后具有不同路由模式的操作重写默认路由。</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code>   <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/{action}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//localhost:6556/</span>
+        <span class="token comment">//localhost:6556/home</span>
+        <span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+        <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//localhost:6556/home/About</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+            <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">//localhost:6556/home/Contact</span>
+        <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+        <span class="token punctuation">{</span>
+            <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+</code></pre></div><p><strong>注：上面的示例中，由于没有添加<code>index</code>的<code>[Route(&quot;home/index&quot;)]</code>特性路由，所以无法通过<code>localhost:1234/home/index</code>访问，必须加上该特性才可以</strong></p> <blockquote><p>如果我们要自定义某个操作路由，并且仍然希望应用默认的路由，就需要在操作方法上（这里是<code>index</code>）再次列出控制器路由</p></blockquote> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//localhost:6556/</span>
+<span class="token comment">//localhost:6556/home</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/index&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>	
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="使用路由前缀"><a href="#使用路由前缀" class="header-anchor">#</a> 使用路由前缀</h3> <p>前面的类仍然带有重复性，例如多次以<code>/home</code>开头，我们可以使用<code>RoutePrefix</code>，这样就只需要在一个地方指定路由以<code>/home</code>开头</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">RoutePrefix</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;{action}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;~/&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>	<span class="token comment">//加这个，支持localhost:1234/</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>		<span class="token comment">//localhost:1234/home</span>
+    <span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>	<span class="token comment">//localhost:1234/home/index</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="路由约束"><a href="#路由约束" class="header-anchor">#</a> 路由约束</h3> <p>当我们传入参数时，方法参数与路由参数容易混淆</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;about/{id}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>      <span class="token comment">//http://localhost:3150/home/about/23</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page. \t&quot;</span> <span class="token operator">+</span> id<span class="token punctuation">.</span><span class="token function">ToString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>当我们传入<code>23</code>时，链接：<code>http://localhost:3150/home/about/23</code>，<code>id</code>代表了方法参数</p> <p><img src="https://i.imgur.com/6KpGviU.png" alt=""></p> <p>但是当我们传入字符，<code>id</code>应该代表什么，链接：<code>http://localhost:3150/home/about/bob</code>。直接抛错</p> <p><img src="https://i.imgur.com/T4SLaEi.png" alt=""></p> <p>这时候我们可以利用方法重写，让方法可以接收数字、字符</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//由于两个方法一致，传入参数的时候，需要对路由参数做区分，否则会报错</span>
+<span class="token punctuation">[</span><span class="token function">Route</span><span class="token punctuation">(</span><span class="token string">&quot;about/{id:int}&quot;</span><span class="token punctuation">)</span><span class="token punctuation">]</span>      <span class="token comment">//http://localhost:3150/home/about/23</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page. \t&quot;</span> <span class="token operator">+</span> id<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;about/{name}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>      <span class="token comment">//http://localhost:3150/home/about/bob</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> name<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page. \t&quot;</span> <span class="token operator">+</span> name<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h4 id="内联约束"><a href="#内联约束" class="header-anchor">#</a> 内联约束</h4> <p>上面的示例中，放到路由模板中的约束，叫做内联约束，当然，还有其他的内联约束</p> <blockquote><p>如果URL看上去类似，但是具有不同的行为，就可以使用路由约束表达URL之间的区别</p></blockquote> <table><thead><tr><th>名称</th> <th>示例</th> <th>描述</th></tr></thead> <tbody><tr><td>bool</td> <td>{n:bool}</td> <td><code>Boolean</code>值</td></tr> <tr><td>datetime</td> <td>{n:datetime}</td> <td><code>DateTime</code>值</td></tr> <tr><td>decimal</td> <td>{n:decimal}</td> <td><code>Decimal</code>值</td></tr> <tr><td>double</td> <td>{n:double}</td> <td><code>Double</code>值</td></tr> <tr><td>float</td> <td>{n:float}</td> <td><code>Single</code>值</td></tr> <tr><td>guid</td> <td>{n:guid}</td> <td><code>Guid</code>值</td></tr> <tr><td>int</td> <td>{n:int}</td> <td>Int32</td></tr> <tr><td>long</td> <td>{n:long}</td> <td>Int64</td></tr> <tr><td>minlength</td> <td>{n:minlength(2)}</td> <td>String，至少包含两个字符</td></tr> <tr><td>maxlength</td> <td>{n:maxlength(2)}</td> <td>String，至多包含两个字符</td></tr> <tr><td>length</td> <td>{n:length(2)}<br>{n:length(2,4)}</td> <td>String，刚好包含两个字符<br>String，包含2，3，4个字符</td></tr> <tr><td>min</td> <td>{n:min(1)}</td> <td>Int64，大于或等于1</td></tr> <tr><td>max</td> <td>{n:max(3)}</td> <td>Int64，小于或等于3</td></tr> <tr><td>range</td> <td>{n:range(1,3)}</td> <td>Int64，1、2、3，一个范围</td></tr> <tr><td>alpha</td> <td>{n:alpha}</td> <td>String，只包含字符A-Z、a-z</td></tr> <tr><td>regex</td> <td>{n:regex(^a+$)}</td> <td>String，只包含一个以上的字符<code>a</code>*，正则表达式</td></tr></tbody></table> <h3 id="路由的默认值"><a href="#路由的默认值" class="header-anchor">#</a> 路由的默认值</h3> <blockquote><p>为路由参数提供默认值。</p></blockquote> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home/{action}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>由上面示例运行，我们会自然的调用<code>/home</code>，然而当我们运行时，是会报错的，因为<code>/home</code>只包含了一个段，这时候，我们就需要为路由添加默认值，让<code>Index</code>变成默认的action，这样就可以默认运行<code>/home/Index</code></p> <h3 id="可选参数"><a href="#可选参数" class="header-anchor">#</a> 可选参数</h3> <blockquote><p>我们可以将路由的参数改为<strong>可选参数</strong>，这样写出的路由更加灵活，传参、不传参都不影响页面的展示</p></blockquote> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">RoutePrefix</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;index&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	
+    <span class="token comment">//localhost:1234/about/123</span>
+    <span class="token comment">//localhost:1234/about	将报错</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;about/{id}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;contract/{id}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+</code></pre></div><p>改为可选参数后</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">RoutePrefix</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;{action=Index}/{id?}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//http://localhost:3150/home/index</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	
+    <span class="token comment">//两者都可以</span>
+    <span class="token comment">//http://localhost:3150/home/about</span>
+    <span class="token comment">//http://localhost:3150/home/about/123</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+	
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Contact</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//ViewBag.Message = &quot;Your contact page.&quot;;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>如果改为可选参数后，方法没有默认赋值，就会出现问题</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">RoutePrefix</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;home&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;{action=Index}/{id?}&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//http://localhost:3150/home/about 报错</span>
+    <span class="token comment">//http://localhost:3150/home/about/123  正常运行</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">About</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;Your application description page.&quot;</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="笔记"><a href="#笔记" class="header-anchor">#</a> 笔记</h2> <blockquote><ul><li><p>从技术角度看，所有<code>URL</code>都是<code>URI</code>。<code>W3C</code>认为<u>“URL是一个非正式的概念，但它非常有用：URL是URI的一种类型，它通过表示自身的主要访问机制来标识资源”</u>。换句话说，<code>URI</code>是某种资源的标识符，而<code>URL</code>则为获取该资源提供了具体的信息。</p></li> <li><p>传入路由特性的字符串叫模板，它就是一个模式匹配规则。决定了这个路由是否适用传入的请求。只有当<code>URL</code>路径具有完全相同的字符串时，路由才会与之匹配。</p> <p>例如：</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Route</span><span class="token attribute-arguments"><span class="token punctuation">(</span><span class="token string">&quot;&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>它只能匹配<code>/localhost:1234</code></p></li> <li><p>当特性路由匹配并运行操作方法时，模型绑定会使路由的路由参数为同名的方法参数填充值</p></li> <li><p>有时控制器上的某些操作具有与其他操作稍微不同的路由，此时，我们可以把最通用的路由放到控制器上，然后具有不同路由模式的操作上重写默认路由</p></li></ul></blockquote></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io/edit/master/docs/backend/dot-net-mvc5/06asp-dot-net-mvc5.md" target="_blank" rel="noopener noreferrer">编辑文档</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/backend/dot-net-mvc5/05asp-dot-net-mvc5.html" class="prev">
+        Ajax，jQuery插件用法
+      </a></span> <!----></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.d58cb2a0.js" defer></script><script src="/assets/js/2.a2eaf130.js" defer></script><script src="/assets/js/16.d3005a89.js" defer></script><script src="/assets/js/3.f31d052a.js" defer></script>
+  </body>
+</html>

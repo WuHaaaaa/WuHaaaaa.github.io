@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>控制器、试图、模型</title>
+    <meta name="generator" content="VuePress 1.7.0">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="/favicon.ico">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="记录记录学到的，用到的">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="google-site-verification" content="Ld_AEWr30siza2LmmZ12csitRGsSj9gqqEAch0UXkTc">
+    
+    <link rel="preload" href="/assets/css/0.styles.90a62652.css" as="style"><link rel="preload" href="/assets/js/app.d58cb2a0.js" as="script"><link rel="preload" href="/assets/js/2.a2eaf130.js" as="script"><link rel="preload" href="/assets/js/11.dc0197f3.js" as="script"><link rel="preload" href="/assets/js/3.f31d052a.js" as="script"><link rel="prefetch" href="/assets/js/10.6bcab2c8.js"><link rel="prefetch" href="/assets/js/12.4ab5a7f5.js"><link rel="prefetch" href="/assets/js/13.c7a0efab.js"><link rel="prefetch" href="/assets/js/14.122dc819.js"><link rel="prefetch" href="/assets/js/15.6fcb116d.js"><link rel="prefetch" href="/assets/js/16.d3005a89.js"><link rel="prefetch" href="/assets/js/17.b3aad75e.js"><link rel="prefetch" href="/assets/js/18.95fab2a2.js"><link rel="prefetch" href="/assets/js/19.c24b1f82.js"><link rel="prefetch" href="/assets/js/20.559b0cd3.js"><link rel="prefetch" href="/assets/js/21.92f879ac.js"><link rel="prefetch" href="/assets/js/22.2bc84a48.js"><link rel="prefetch" href="/assets/js/23.96e98b31.js"><link rel="prefetch" href="/assets/js/24.3e4659f4.js"><link rel="prefetch" href="/assets/js/25.6e32e13d.js"><link rel="prefetch" href="/assets/js/26.dbe3196b.js"><link rel="prefetch" href="/assets/js/27.a7407f84.js"><link rel="prefetch" href="/assets/js/28.8e9c4f31.js"><link rel="prefetch" href="/assets/js/29.fe7b9c37.js"><link rel="prefetch" href="/assets/js/30.548b5040.js"><link rel="prefetch" href="/assets/js/31.23d47226.js"><link rel="prefetch" href="/assets/js/32.85191567.js"><link rel="prefetch" href="/assets/js/33.c6b146f7.js"><link rel="prefetch" href="/assets/js/34.cb5228a1.js"><link rel="prefetch" href="/assets/js/35.b6c4fa93.js"><link rel="prefetch" href="/assets/js/36.86a8c5ba.js"><link rel="prefetch" href="/assets/js/37.c4bb9812.js"><link rel="prefetch" href="/assets/js/38.30f9264a.js"><link rel="prefetch" href="/assets/js/39.6a40403d.js"><link rel="prefetch" href="/assets/js/4.a89e093a.js"><link rel="prefetch" href="/assets/js/40.3cb39a67.js"><link rel="prefetch" href="/assets/js/41.0998ab93.js"><link rel="prefetch" href="/assets/js/42.d1dfa35a.js"><link rel="prefetch" href="/assets/js/43.0253544b.js"><link rel="prefetch" href="/assets/js/44.ba1a0cdb.js"><link rel="prefetch" href="/assets/js/45.f5b14025.js"><link rel="prefetch" href="/assets/js/46.70c99fa8.js"><link rel="prefetch" href="/assets/js/47.329a3b82.js"><link rel="prefetch" href="/assets/js/5.1f4073b2.js"><link rel="prefetch" href="/assets/js/6.dfa810f9.js"><link rel="prefetch" href="/assets/js/7.170c203a.js"><link rel="prefetch" href="/assets/js/8.9e8bf44a.js"><link rel="prefetch" href="/assets/js/9.7d1d6033.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.90a62652.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><img src="/favicon.ico" alt="" class="logo"> <!----></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link router-link-active">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="其他" class="dropdown-title"><span class="title">其他</span> <span class="arrow down"></span></button> <button type="button" aria-label="其他" class="mobile-dropdown-title"><span class="title">其他</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/more/books/" class="nav-link">
+  看过的书
+</a></li><li class="dropdown-item"><!----> <a href="/more/leetcode/" class="nav-link">
+  LeetCode
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="后端" class="dropdown-title"><span class="title">后端</span> <span class="arrow down"></span></button> <button type="button" aria-label="后端" class="mobile-dropdown-title"><span class="title">后端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/backend/dot-net-mvc5/" class="nav-link router-link-active">
+  .NET MVC5
+</a></li><li class="dropdown-item"><!----> <a href="/backend/gRPC/" class="nav-link">
+  Grpc
+</a></li></ul></div></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="前端" class="dropdown-title"><span class="title">前端</span> <span class="arrow down"></span></button> <button type="button" aria-label="前端" class="mobile-dropdown-title"><span class="title">前端</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/frontend/javascript/" class="nav-link">
+  JavaScript
+</a></li><li class="dropdown-item"><!----> <a href="/frontend/echarts/" class="nav-link">
+  Echarts
+</a></li></ul></div></div> <a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>dot-net-mvc5</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/backend/dot-net-mvc5/" aria-current="page" class="sidebar-link">首页</a></li><li><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html" aria-current="page" class="active sidebar-link">控制器、试图、模型</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html#前言" class="sidebar-link">前言</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html#控制器" class="sidebar-link">控制器</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html#视图" class="sidebar-link">视图</a></li><li class="sidebar-sub-header"><a href="/backend/dot-net-mvc5/01asp-dot-net-mvc5.html#模型" class="sidebar-link">模型</a></li></ul></li><li><a href="/backend/dot-net-mvc5/02asp-dot-net-mvc5.html" class="sidebar-link">表单和HTML辅助方法</a></li><li><a href="/backend/dot-net-mvc5/03asp-dot-net-mvc5.html" class="sidebar-link">数据注解，验证</a></li><li><a href="/backend/dot-net-mvc5/04asp-dot-net-mvc5.html" class="sidebar-link">安全性、权限验证、角色成员分配</a></li><li><a href="/backend/dot-net-mvc5/05asp-dot-net-mvc5.html" class="sidebar-link">Ajax，jQuery插件用法</a></li><li><a href="/backend/dot-net-mvc5/06asp-dot-net-mvc5.html" class="sidebar-link">路由概念，底层实现</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h2 id="前言"><a href="#前言" class="header-anchor">#</a> 前言</h2> <blockquote><p>在工作中遇到了太多关于MVC的问题，之前没有系统的学习过，现在趁闲暇时间好好吸收一些不熟悉的知识。第一章：控制器、试图、模型</p></blockquote> <h2 id="控制器"><a href="#控制器" class="header-anchor">#</a> 控制器</h2> <h3 id="httputility-htmlencode"><a href="#httputility-htmlencode" class="header-anchor">#</a> HttpUtility.HtmlEncode</h3> <p>预处理用户输入，防止用户用链接向视图中诸如<code>JavaScript</code>代码或<code>HTML</code>标记</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">// GET: Store/Browse?genre=?Disco  </span>
+<span class="token comment">//展示该流派下所有音乐专辑</span>
+<span class="token keyword">public</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> <span class="token function">Browse</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">string</span></span> genre<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">string</span></span> message <span class="token operator">=</span> HttpUtility<span class="token punctuation">.</span><span class="token function">HtmlEncode</span><span class="token punctuation">(</span><span class="token string">&quot;Store.Browse, Genre = &quot;</span> <span class="token operator">+</span> genre<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> message<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>正确浏览：</p> <p><img src="https://i.imgur.com/nbqgGs2.png" alt="image-20191024220210051"></p> <p>注入示例：</p> <p><img src="https://i.imgur.com/z2j2Z7g.png" alt="image-20191024220125954"></p> <h2 id="视图"><a href="#视图" class="header-anchor">#</a> 视图</h2> <h3 id="视图约定"><a href="#视图约定" class="header-anchor">#</a> 视图约定</h3> <p>ASP.NET MVC中的大部分视图如约定设置一样</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//返回的视图路径是/Views/Home/Index.cshtml</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>但是这种约定可以重写</p> <p>例如：当我想在<code>Index</code>方法里面返回另外一个视图<code>/Home/NoIndex.cshtml</code>时</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//返回的视图路径是/Views/Home/NoIndex.cshtml</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token string">&quot;NoIndex&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>再或者，我们需要不同目录下的控制器视图，针对这种情况，我们需要添加<code>~</code>符号来提供视图完整路径</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">HomeController</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">Controller</span></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//返回的视图路径是/Views/Example/Index.cshtml</span>
+        <span class="token comment">//必须添加后缀，因为找的路径不是当前控制器的视图（Views/Home）目录下的</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token string">&quot;~/Views/Example/Index.cshtml&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="强类型视图"><a href="#强类型视图" class="header-anchor">#</a> 强类型视图</h3> <h4 id="第一种-后端使用viewbag"><a href="#第一种-后端使用viewbag" class="header-anchor">#</a> 第一种：后端使用<code>ViewBag</code></h4> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//后端：AlbumController.cs</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">List</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> albums <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Album<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        albums<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span> <span class="token punctuation">{</span> Title <span class="token operator">=</span> <span class="token string">&quot;Product&quot;</span> <span class="token operator">+</span> i <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ViewBag<span class="token punctuation">.</span>Albums <span class="token operator">=</span> albums<span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!--前端一：使用as关键字转换类型--&gt;</span>
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>使用as关键字强制转换类型<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    @foreach (Album a in ViewBag.Albums as IEnumerable<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Album</span><span class="token punctuation">&gt;</span></span>)
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>
+            @a.Title
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+    
+<span class="token comment">&lt;!--前端二：使用dynamic关键字转换类型--&gt;</span>
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>使用dynamic关键字保持代码整洁，但是这样无法使用智能感知（提示）<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    @foreach (dynamic a in ViewBag.Albums)
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>
+            @a.Title
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="第二种-后端使用view-重载方法"><a href="#第二种-后端使用view-重载方法" class="header-anchor">#</a> 第二种：后端使用<code>View()</code>重载方法</h4> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Index</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> albums <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">List<span class="token punctuation">&lt;</span>Album<span class="token punctuation">&gt;</span></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">10</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        albums<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span> <span class="token punctuation">{</span> Title <span class="token operator">=</span> <span class="token string">&quot;Product&quot;</span> <span class="token operator">+</span> i <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>albums<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><div class="language-html extra-class"><pre class="language-html"><code><span class="token comment">&lt;!--前端一：使用关键字@model声明--&gt;</span>
+@model IEnumerable<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>MvcMusicStore.Models.Album</span><span class="token punctuation">&gt;</span></span>
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token comment">&lt;!--告知视图哪种类型的模型正在使用@model声明--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>使用智能感知，使用关键字@model<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    @foreach (Album a in ViewBag.Albums as IEnumerable<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Album</span><span class="token punctuation">&gt;</span></span>)
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>
+            @a.Title
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+    
+<span class="token comment">&lt;!--前端二：使用@using关键字声明--&gt;</span>
+@using MvcMusicStore.Models
+@model IEnumerable<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>Album</span><span class="token punctuation">&gt;</span></span>
+@{
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>使用@using关键字声明<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    @foreach (dynamic a in ViewBag.Albums)
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>
+            @a.Title
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h3 id="razor"><a href="#razor" class="header-anchor">#</a> Razor</h3> <h4 id="语法二义性"><a href="#语法二义性" class="header-anchor">#</a> 语法二义性</h4> <p>用<code>()</code>或<code>@@</code>解决</p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+	string message = &quot;MyApp&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>@message.Model<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--想要输出&lt;span&gt;Myapp.Model&lt;/span&gt;，会报错，message没有Model类型--&gt;</span>
+<span class="token comment">&lt;!--解决：--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>@(message).Model<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+
+
+<span class="token comment">&lt;!--尝试输出下面语句--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+  You should Follow
+  @aspnet
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--需要写成如下形式：--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+  You should Follow
+  @@aspnet
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="跨站脚本注入攻击"><a href="#跨站脚本注入攻击" class="header-anchor">#</a> 跨站脚本注入攻击</h4> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    string message = &quot;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'haacked!'</span><span class="token punctuation">)</span></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>@message<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>    
+<span class="token comment">&lt;!--输出这一句字符串，并不会提示--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript"><span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'haacked!'</span><span class="token punctuation">)</span></span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--因为已经对message进行了编码--&gt;</span>
+<span class="token comment">&lt;!--实际输出：--&gt;</span>
+<span class="token comment">&lt;!--&amp;lt;script&amp;gt;alert(&amp;#39;haacked!&amp;#39;)&amp;lt;/script&amp;gt;--&gt;</span>
+
+<span class="token comment">&lt;!--如果想要输出HTML--&gt;</span>
+@{
+	string message = &quot;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>This is bold!'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>&quot;;
+}
+<span class="token comment">&lt;!--输出不经过HTML编码的消息--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>@Html.Raw(message)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--输出：--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>This is bold!'<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token comment">&lt;!--如果想要执行脚本--&gt;</span>
+
+</code></pre></div><h4 id="语法示例"><a href="#语法示例" class="header-anchor">#</a> 语法示例</h4> <h5 id="隐式代码表达式"><a href="#隐式代码表达式" class="header-anchor">#</a> 隐式代码表达式</h5> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>@model.Message<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--显示--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>hello world<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="显示代码表达式"><a href="#显示代码表达式" class="header-anchor">#</a> 显示代码表达式</h5> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>1 + 2 = @(1 + 2)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--显示--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>1 + 2 = 3<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="无编码表达式"><a href="#无编码表达式" class="header-anchor">#</a> 无编码表达式</h5> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    string message = &quot;<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>John<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>Hello,@Html.Raw(message)<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--显示:姓名会被加粗--&gt;</span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>Hello,<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>John<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="代码块"><a href="#代码块" class="header-anchor">#</a> 代码块</h5> <div class="language-html extra-class"><pre class="language-html"><code>@{
+	string x = &quot;123&quot;;
+	int a = 100;
+}
+</code></pre></div><h5 id="文本标记结合"><a href="#文本标记结合" class="header-anchor">#</a> 文本标记结合</h5> <div class="language-html extra-class"><pre class="language-html"><code>@{ 
+    List<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span> list = new List<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>string</span><span class="token punctuation">&gt;</span></span>();
+    list.Add(&quot;Kana&quot;);
+    list.Add(&quot;Ann&quot;);
+    list.Add(&quot;Jack&quot;);
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span><span class="token punctuation">&gt;</span></span>
+    @foreach (var name in list)
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span><span class="token punctuation">&gt;</span></span>Name:@name.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!--&lt;li&gt;Name:Kana.&lt;/li&gt;--&gt;</span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="混合代码与纯文本"><a href="#混合代码与纯文本" class="header-anchor">#</a> 混合代码与纯文本</h5> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    bool showMessage = true;
+}
+@if (showMessage)
+{
+    <span class="token comment">&lt;!--将标签写入响应中，标签本身不写入--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>text</span><span class="token punctuation">&gt;</span></span>This is a plain text<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>text</span><span class="token punctuation">&gt;</span></span>
+}
+
+@if (showMessage)
+{
+    <span class="token comment">&lt;!--只能转换一行文本--&gt;</span>
+    @:This is a plain text
+}
+</code></pre></div><h5 id="转义代码分隔符"><a href="#转义代码分隔符" class="header-anchor">#</a> 转义代码分隔符</h5> <div class="language-html extra-class"><pre class="language-html"><code>The ASP.NET Twitter Handle is <span class="token entity" title="&amp;#64;">&amp;#64;</span>aspnet
+The ASP.NET Twitter Handle is @@aspnet
+
+<span class="token comment">&lt;!--显示--&gt;</span>
+The ASP.NET Twitter Handle is @aspnet
+The ASP.NET Twitter Handle is @aspnet
+</code></pre></div><h5 id="服务器端的注释"><a href="#服务器端的注释" class="header-anchor">#</a> 服务器端的注释</h5> <p><code>@*content*@</code>：可以注释一行、多行</p> <div class="language-html extra-class"><pre class="language-html"><code>@*The ASP.NET Twitter Handle is <span class="token entity" title="&amp;#64;">&amp;#64;</span>aspnet
+The ASP.NET Twitter Handle is @@aspnet
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is the main content<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+
+@section Footer{
+    This is the <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Footer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>
+}*@
+</code></pre></div><h5 id="调用泛型方法"><a href="#调用泛型方法" class="header-anchor">#</a> 调用泛型方法</h5> <p>由于尖括号会导致Razor回转标记，会报错，所以需要添加括号</p> <div class="language-html extra-class"><pre class="language-html"><code>@(Html.SomeMethod<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>AType</span><span class="token punctuation">&gt;</span></span>())
+</code></pre></div><h4 id="布局"><a href="#布局" class="header-anchor">#</a> 布局</h4> <h5 id="第一版"><a href="#第一版" class="header-anchor">#</a> 第一版</h5> <p>布局文件：<code>_SiteLayout.cshtml</code></p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>width=device-width<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>@ViewBag.Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>@ViewBag.Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>main-content<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        @RenderBody()
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>引用布局：<code>Index.cshtml</code></p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    Layout = &quot;~/Views/Shared/_SiteLayout.cshtml&quot;;
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is the main content!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>最终展示内容</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>width=device-width<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+	<span class="token comment">&lt;!--被Index替换--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Index<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+	<span class="token comment">&lt;!--被Index替换--&gt;</span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Index<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>main-content<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+		<span class="token comment">&lt;!--被Index中的内容替换--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is the main content!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="第二版"><a href="#第二版" class="header-anchor">#</a> 第二版</h5> <p><strong>节</strong>可以添加多个</p> <p>布局页添加节点，比如页脚：<code>_SiteLayout.cshtml</code></p> <p>添加完节之后，若不向该布局页的内容页添加对应节的内容，则会报错</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>width=device-width<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>@ViewBag.Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>@ViewBag.Title<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>main-content<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        @RenderBody()
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!--添加Footer节--&gt;</span>
+        @RenderSection(&quot;Footer&quot;)
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>引用页：<code>Index.cshtml</code></p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    Layout = &quot;~/Views/Shared/_SiteLayout.cshtml&quot;;
+    ViewBag.Title = &quot;Index&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is the main content!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+<span class="token comment">&lt;!--添加内容--&gt;</span>
+@section Footer{
+    This is the <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Footer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>
+}
+</code></pre></div><p>最终展示</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>meta</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>viewport<span class="token punctuation">&quot;</span></span> <span class="token attr-name">content</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>width=device-width<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token comment">&lt;!--被Index替换--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span>Index<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+        <span class="token comment">&lt;!--被Index替换--&gt;</span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h1</span><span class="token punctuation">&gt;</span></span>Index<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h1</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>main-content<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+            <span class="token comment">&lt;!--被Index中的内容替换--&gt;</span>
+            <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>This is the main content!<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>
+            This is the <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>strong</span><span class="token punctuation">&gt;</span></span>Footer<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>strong</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="第三版"><a href="#第三版" class="header-anchor">#</a> 第三版</h5> <p><code>@section</code>语法为布局中定义了一个节指定了内容，但是默认情况下，比如为布局定义的每一个节提供内容，当向布局中添加一个新的节时，这样会使引用该布局的每一个视图都不正常，这时候就需要在<code>RenderSection</code>方法中添加一个指定内容</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>
+    @RenderSection(&quot;Footer&quot;, required: false)
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h5 id="第四版"><a href="#第四版" class="header-anchor">#</a> 第四版</h5> <p>这样还是不太灵活，若我们能在默认的情况下添加一些内容就更好了，如下：</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span><span class="token punctuation">&gt;</span></span>
+    @if (IsSectionDefined(&quot;Footer&quot;)) {
+        @RenderSection(&quot;Footer&quot;);
+    }
+    else
+    {
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span><span class="token punctuation">&gt;</span></span>This is the default Fotter.<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+    }
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><h4 id="viewstart"><a href="#viewstart" class="header-anchor">#</a> ViewStart</h4> <p><code>ViewStart</code>是整个MVC视图里面最先执行的，若很多页面，都需要引用相同的<code>Layout</code>布局页，那么可以使用<code>ViewStart</code>指定，然后其他页面可以默认使用这个<code>ViewStart</code>里面的布局页</p> <p>_ViewStart.cshtml</p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    Layout = &quot;~/Views/Shared/_SiteLayout.cshtml&quot;;
+}
+</code></pre></div><p>_SiteLayout.cshtml</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token doctype"><span class="token punctuation">&lt;!</span><span class="token doctype-tag">DOCTYPE</span> <span class="token name">html</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span>
+            this is a layout html.
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span>
+        @RenderBody()
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>~/Views/Sample/Index.html</p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+	ViewBag.Title = &quot;Index&quot;;
+	Layout = &quot;~/Views/Shared/_SiteLayout.cshtml&quot;
+}
+</code></pre></div><p>可以省略Layout部分：</p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+	ViewBag.Title = &quot;Index&quot;;
+}
+</code></pre></div><h4 id="部分视图"><a href="#部分视图" class="header-anchor">#</a> 部分视图</h4> <p>在使用局部刷新时，部分视图很有用，可以省略很多的代码。</p> <p><code>Controller</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Message</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    ViewBag<span class="token punctuation">.</span>Message <span class="token operator">=</span> <span class="token string">&quot;This is a partial view.&quot;</span><span class="token punctuation">;</span>
+    <span class="token comment">//设置Message的值，返回部分视图</span>
+    <span class="token keyword">return</span> <span class="token function">PartialView</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>Message.cshtml</code>（部分视图）不能使用指定布局，其他的看起来和正常布局没有区别</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>h2</span><span class="token punctuation">&gt;</span></span>@ViewBag.Message<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>h2</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>最终渲染页</p> <p><code>controller</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">PartialViewDemo</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">//返回一个普通视图，它默认引用了ViewStart的布局页</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>views</p> <div class="language-html extra-class"><pre class="language-html"><code>@{
+    View.Title = &quot;PartialViewDemo&quot;;
+}
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">id</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>result<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+
+@section scripts {
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>text/javascript<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+    <span class="token function">$</span><span class="token punctuation">(</span><span class="token keyword">function</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">//使用Ajax访问分布视图，并且将渲染后的分布视图加载到result元素中</span>
+        <span class="token function">$</span><span class="token punctuation">(</span><span class="token string">'#result'</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">load</span><span class="token punctuation">(</span><span class="token string">'/sample/message'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+}
+</code></pre></div><h2 id="模型"><a href="#模型" class="header-anchor">#</a> 模型</h2> <h3 id="配置数据库连接"><a href="#配置数据库连接" class="header-anchor">#</a> 配置数据库连接</h3> <p>在项目中的<code>Web.config</code>（不是视图下的<code>Web.config</code>）中，我们可以使用连接字符串，指定数据库，或使用默认的<code>LocalDB</code></p> <div class="language-xml extra-class"><pre class="language-xml"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>configuration</span><span class="token punctuation">&gt;</span></span>
+    ...
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>connectionStrings</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>add</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>DefaultConnection<span class="token punctuation">&quot;</span></span> <span class="token attr-name">connectionString</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-MVCMusicStore_m-20191029061148.mdf;Initial Catalog=aspnet-MVCMusicStore_m-20191029061148;Integrated Security=True<span class="token punctuation">&quot;</span></span>
+             <span class="token attr-name">providerName</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>System.Data.SqlClient<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>add</span> <span class="token attr-name">name</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>MusicStoreDB<span class="token punctuation">&quot;</span></span> <span class="token attr-name">connectionString</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>Data Source=(localdb)\MSSQLLocalDB; Initial Catalog=MusicStoreDB-20191029065356; Integrated Security=True; MultipleActiveResultSets=True; AttachDbFilename=|DataDirectory|MusicStoreDB-20191029065356.mdf<span class="token punctuation">&quot;</span></span>
+             <span class="token attr-name">providerName</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>System.Data.SqlClient<span class="token punctuation">&quot;</span></span> <span class="token punctuation">/&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>connectionStrings</span><span class="token punctuation">&gt;</span></span>
+    ...
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>configuration</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>其中的<code>MusicStoreDB</code>，就是我们创建的数据库上下文类（使用基于MVC5，包含视图的控制器，在其中新增的数据库上下文，他会在<code>\Models</code>中生成<code>MusicStoreDB</code>类）</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MusicStoreDB</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">DbContext</span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//name可以指定为任意名称，相对的，Web.config需要相对应name的连接字符串</span>
+    <span class="token keyword">public</span> <span class="token function">MusicStoreDB</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">:</span> <span class="token keyword">base</span><span class="token punctuation">(</span><span class="token string">&quot;name=MusicStoreDB&quot;</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>DbSet<span class="token punctuation">&lt;</span>MVCMusicStore_m<span class="token punctuation">.</span>Models<span class="token punctuation">.</span>Album<span class="token punctuation">&gt;</span></span> Albums <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>DbSet<span class="token punctuation">&lt;</span>MVCMusicStore_m<span class="token punctuation">.</span>Models<span class="token punctuation">.</span>Artist<span class="token punctuation">&gt;</span></span> Artists <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token return-type class-name">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>DbSet<span class="token punctuation">&lt;</span>MVCMusicStore_m<span class="token punctuation">.</span>Models<span class="token punctuation">.</span>Genre<span class="token punctuation">&gt;</span></span> Genres <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="初始化器"><a href="#初始化器" class="header-anchor">#</a> 初始化器</h3> <p>当我们运行程序的时候，在开发阶段，可以快速修改数据库字段，这时<strong>初始化器</strong>将会提高我们的开发效率</p> <p>例如：我们可以在其中设置，每次程序运行的时候，都将重新删除数据库，然后根据现有修改后的<code>Model</code>在创建一次</p> <p><code>Global.asax</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">protected</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Application_Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//设置每次启动应用时，都重建一次数据库</span>
+    <span class="token comment">//传递一个IDatabaseInitializer对象</span>
+    <span class="token comment">//一个对象是DropCreateDatabaseAlways，删除后，重建数据库</span>
+    <span class="token comment">//另外一个是DropCreateDatabaseIfModelChanges，当model有改变，则删除、重建数据库</span>
+    Database<span class="token punctuation">.</span><span class="token function">SetInitializer</span><span class="token punctuation">(</span><span class="token keyword">new</span> DropCreateDatabaseAlways<span class="token operator">&lt;</span>MusicStoreDB<span class="token operator">&gt;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    AreaRegistration<span class="token punctuation">.</span><span class="token function">RegisterAllAreas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    FilterConfig<span class="token punctuation">.</span><span class="token function">RegisterGlobalFilters</span><span class="token punctuation">(</span>GlobalFilters<span class="token punctuation">.</span>Filters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    RouteConfig<span class="token punctuation">.</span><span class="token function">RegisterRoutes</span><span class="token punctuation">(</span>RouteTable<span class="token punctuation">.</span>Routes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BundleConfig<span class="token punctuation">.</span><span class="token function">RegisterBundles</span><span class="token punctuation">(</span>BundleTable<span class="token punctuation">.</span>Bundles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>在例如：我们还可以设置，每次删除后，重新创建的时候，插入一些默认的数据，以方便测试我们开发的功能是否正常</p> <p><code>Global.asax</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">protected</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Application_Start</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//注册【每次启动时，删除数据库，新增默认数据】初始化器</span>
+  
+    Database<span class="token punctuation">.</span><span class="token function">SetInitializer</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">MusicStoreDbInitializer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    AreaRegistration<span class="token punctuation">.</span><span class="token function">RegisterAllAreas</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    FilterConfig<span class="token punctuation">.</span><span class="token function">RegisterGlobalFilters</span><span class="token punctuation">(</span>GlobalFilters<span class="token punctuation">.</span>Filters<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    RouteConfig<span class="token punctuation">.</span><span class="token function">RegisterRoutes</span><span class="token punctuation">(</span>RouteTable<span class="token punctuation">.</span>Routes<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    BundleConfig<span class="token punctuation">.</span><span class="token function">RegisterBundles</span><span class="token punctuation">(</span>BundleTable<span class="token punctuation">.</span>Bundles<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>/Models/MusicStoreDbInitializer.cs</code></p> <p>在其中插入一些默认数据，当我们开始运行应用程序的时候，这些数据就会存在里面</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">MusicStoreDbInitializer</span> <span class="token punctuation">:</span> <span class="token type-list"><span class="token class-name">System<span class="token punctuation">.</span>Data<span class="token punctuation">.</span>Entity<span class="token punctuation">.</span>DropCreateDatabaseAlways<span class="token punctuation">&lt;</span>MusicStoreDB<span class="token punctuation">&gt;</span></span></span>
+<span class="token punctuation">{</span>
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// 设置每次启动时，数据库中的默认数据</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token comment">/// &lt;param name=&quot;context&quot;&gt;&lt;/param&gt;</span>
+    <span class="token keyword">protected</span> <span class="token keyword">override</span> <span class="token return-type class-name"><span class="token keyword">void</span></span> <span class="token function">Seed</span><span class="token punctuation">(</span><span class="token class-name">MusicStoreDB</span> context<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        context<span class="token punctuation">.</span>Artists<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Artist</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Al Di Meola&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span>Genres<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Genre</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Jazz&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        context<span class="token punctuation">.</span>Albums<span class="token punctuation">.</span><span class="token function">Add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span>
+                           <span class="token punctuation">{</span>
+                               Artist <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Artist</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Rush&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                               Genre <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Genre</span> <span class="token punctuation">{</span> Name <span class="token operator">=</span> <span class="token string">&quot;Rock&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">,</span>
+                               Price <span class="token operator">=</span> <span class="token number">9.99m</span><span class="token punctuation">,</span>
+                               Title <span class="token operator">=</span> <span class="token string">&quot;Caravan&quot;</span><span class="token punctuation">,</span>
+                           <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">base</span><span class="token punctuation">.</span><span class="token function">Seed</span><span class="token punctuation">(</span>context<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h3 id="数据库迁移"><a href="#数据库迁移" class="header-anchor">#</a> 数据库迁移</h3> <blockquote><p>数据库迁移也支持在Global.asax中添加，不过操作更为复杂，所代表的功能也更高级，它可以实现例如：在改变某个字段后，数据不会情况，程序可以照常启动、运行。</p></blockquote> <h3 id="数据渲染页面"><a href="#数据渲染页面" class="header-anchor">#</a> 数据渲染页面</h3> <p>当在前端需要展示一个下拉列表时</p> <p>前端：</p> <div class="language-html extra-class"><pre class="language-html"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>form-group<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+    @Html.LabelFor(model =&gt; model.GenerId, &quot;GenerId&quot;, htmlAttributes: new { @class = &quot;control-label col-md-2&quot; })
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>div</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>col-md-10<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        @Html.DropDownList(&quot;GenerId&quot;, null, htmlAttributes: new { @class = &quot;form-control&quot; })
+        @Html.ValidationMessageFor(model =&gt; model.GenerId, &quot;&quot;, new { @class = &quot;text-danger&quot; })
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>div</span><span class="token punctuation">&gt;</span></span>
+</code></pre></div><p>后端：</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token comment">//构建下拉列表需要的数据</span>
+<span class="token comment">//参数说明：</span>
+<span class="token comment">//1. 指定了将要放在列表中的项</span>
+<span class="token comment">//2. 属性名称（选中指定项目时使用的值：例如选中第一个，则值是1，名称是Rock）</span>
+<span class="token comment">//3. 要显示的文本(Rock，Rush等)</span>
+<span class="token comment">//4. 包含最初选定值</span>
+ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div><h3 id="数据保存"><a href="#数据保存" class="header-anchor">#</a> 数据保存</h3> <p>当用户编辑后点击提交时，<code>HTML</code>会发送一个<code>HTTP POST</code>请求，请求回到当前页面，浏览器这时候会收集表单输入的所有信息，以及<code>name</code>属性值，然后一起发送。这里需要注意的是<code>input</code>和<code>select</code>元素的<code>name</code>属性，<strong>这些名称是要匹配Album模型中的属性名称</strong>。</p> <h3 id="模型绑定"><a href="#模型绑定" class="header-anchor">#</a> 模型绑定</h3> <p>当前端将数据通过<code>HTTP POST</code>的方式提交到后端时，后端往往采用的是下面这种方式取数据</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token class-name"><span class="token keyword">var</span></span> album <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    album<span class="token punctuation">.</span>Title <span class="token operator">=</span> Request<span class="token punctuation">.</span>Form<span class="token punctuation">[</span><span class="token string">&quot;Title&quot;</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+    album<span class="token punctuation">.</span>Price <span class="token operator">=</span> Decimal<span class="token punctuation">.</span><span class="token function">Parse</span><span class="token punctuation">(</span>Request<span class="token punctuation">.</span>Form<span class="token punctuation">[</span><span class="token string">&quot;Price&quot;</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这时候，我们可以使用模型绑定来省略繁杂的操作</p> <p>当模型绑定器看到<code>Album</code>具有<code>TItle</code>属性，它就会在请求中（不是表单中）查找（值提供器在请求的不同区域查找，比如<code>URL</code>、路由、表单集合）参数</p> <h4 id="默认绑定"><a href="#默认绑定" class="header-anchor">#</a> 默认绑定</h4> <p>它会自动从请求的数据中查找出<code>Album</code>相关的属性值，然后组装成<code>Album</code>对象</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token class-name">Album</span> album<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>它也支持将原型参数传入，比如<code>GET</code>请求</p> <p>它会从<code>URL</code>中查询<code>ID</code>值：<code>/StoreManager/Edit/1</code>或<code>/StoreManager/Edit?id=1</code></p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token class-name"><span class="token keyword">int</span></span> id<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+	<span class="token range operator">..</span><span class="token punctuation">.</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>有时候，我们接收的类中，几个字段不需要（<code>Album</code>会尽可能的查找相关的字段），这时候，若有人恶意提交相关的字段，就会造成程序崩溃</p> <p><code>Album</code>类：其中，<code>Genre</code>与<code>Artist</code>是不需要传入的字段</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Album</span>
+<span class="token punctuation">{</span>
+    <span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Key</span></span><span class="token punctuation">]</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">int</span></span>  AlbumId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">int</span></span>  GenerId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">int</span></span>  ArtistId <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">string</span></span>  Title <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">decimal</span></span> Price <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name"><span class="token keyword">string</span></span> AlbumArtUrl <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// 流派</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">Genre</span> Genre <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token comment">/// &lt;summary&gt;</span>
+    <span class="token comment">/// 艺术家</span>
+    <span class="token comment">/// &lt;/summary&gt;</span>
+    <span class="token keyword">public</span> <span class="token keyword">virtual</span> <span class="token return-type class-name">Artist</span> Artist <span class="token punctuation">{</span> <span class="token keyword">get</span><span class="token punctuation">;</span> <span class="token keyword">set</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>这时候我们在保存的时候，就避免接收这两个属性</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">ValidateAntiForgeryToken</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">Bind</span><span class="token attribute-arguments"><span class="token punctuation">(</span>Include <span class="token operator">=</span> <span class="token string">&quot;AlbumId,GenerId,ArtistId,Title,Price,AlbumArtUrl&quot;</span><span class="token punctuation">)</span></span></span><span class="token punctuation">]</span> <span class="token class-name">Album</span> album<span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token comment">//若验证未通过，album会继续被返回，用于重新构建下拉列表，以及相关信息</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ModelState<span class="token punctuation">.</span>IsValid<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        db<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Modified<span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">RedirectToAction</span><span class="token punctuation">(</span><span class="token string">&quot;Index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    ViewBag<span class="token punctuation">.</span>ArtistId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Artists<span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>ArtistId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><img src="http://image.ruanheng.xyz/images/devenv_3X22KeiPVK.png" alt=""></p> <h4 id="显示模型绑定"><a href="#显示模型绑定" class="header-anchor">#</a> 显示模型绑定</h4> <p><code>UpdateModel()</code>若出现错误，或模型无效时，将会抛出异常</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">ValidateAntiForgeryToken</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> album <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//验证模型绑定，默认查找所有album中的属性</span>
+        <span class="token function">UpdateModel</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Modified<span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">RedirectToAction</span><span class="token punctuation">(</span><span class="token string">&quot;Index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>ArtistId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Artists<span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>ArtistId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p><code>TryUpdateModel()</code>绑定失败则返回false，绑定成功则返回true</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">ValidateAntiForgeryToken</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> album <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">TryUpdateModel</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        db<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Modified<span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">RedirectToAction</span><span class="token punctuation">(</span><span class="token string">&quot;Index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>ArtistId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Artists<span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>ArtistId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>也可以根据<strong>模型状态</strong>查看是否绑定成功（<strong>模型绑定副产品就是模型状态</strong>）</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">ValidateAntiForgeryToken</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> album <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">TryUpdateModel</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">if</span> <span class="token punctuation">(</span>ModelState<span class="token punctuation">.</span>IsValid<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        db<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Modified<span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">RedirectToAction</span><span class="token punctuation">(</span><span class="token string">&quot;Index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">else</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>ArtistId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Artists<span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>ArtistId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>如前面的<code>Bind</code>特性一样，当我们使用<strong>显示模型绑定</strong>时，也可以指定允许绑定的属性</p> <p><code>UpdateModel()</code>与<code>TryUpdateModel()</code>都有重载的方法，接受一个字符串数组，用于指定绑定属性有哪些</p> <div class="language-CSharp extra-class"><pre class="language-csharp"><code><span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">HttpPost</span></span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token attribute"><span class="token class-name">ValidateAntiForgeryToken</span></span><span class="token punctuation">]</span>
+<span class="token keyword">public</span> <span class="token return-type class-name">ActionResult</span> <span class="token function">Edit</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token punctuation">{</span>
+    <span class="token class-name"><span class="token keyword">var</span></span> album <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">Album</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">try</span>
+    <span class="token punctuation">{</span>
+        <span class="token comment">//验证模型绑定，查找指定的album中的属性</span>
+        <span class="token function">UpdateModel</span><span class="token punctuation">(</span>album<span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name"><span class="token keyword">string</span><span class="token punctuation">[</span><span class="token punctuation">]</span></span> <span class="token punctuation">{</span> <span class="token string">&quot;AlbumId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Title&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Price&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;AlbumArtUrl&quot;</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment">//TryUpdateModel(album, new string[] { &quot;AlbumId&quot;, &quot;GenerId&quot;, &quot;ArtistId&quot;, &quot;Title&quot;, &quot;Price&quot;, &quot;AlbumArtUrl&quot; })</span>
+        db<span class="token punctuation">.</span><span class="token function">Entry</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">.</span>State <span class="token operator">=</span> EntityState<span class="token punctuation">.</span>Modified<span class="token punctuation">;</span>
+        db<span class="token punctuation">.</span><span class="token function">SaveChanges</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">RedirectToAction</span><span class="token punctuation">(</span><span class="token string">&quot;Index&quot;</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">catch</span> <span class="token punctuation">(</span><span class="token class-name">Exception</span><span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        ViewBag<span class="token punctuation">.</span>ArtistId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Artists<span class="token punctuation">,</span> <span class="token string">&quot;ArtistId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>ArtistId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        ViewBag<span class="token punctuation">.</span>GenerId <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token constructor-invocation class-name">SelectList</span><span class="token punctuation">(</span>db<span class="token punctuation">.</span>Genres<span class="token punctuation">,</span> <span class="token string">&quot;GenerId&quot;</span><span class="token punctuation">,</span> <span class="token string">&quot;Name&quot;</span><span class="token punctuation">,</span> album<span class="token punctuation">.</span>GenerId<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token function">View</span><span class="token punctuation">(</span>album<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/WuHaaaaa/WuHaaaaa.github.io/edit/master/docs/backend/dot-net-mvc5/01asp-dot-net-mvc5.md" target="_blank" rel="noopener noreferrer">编辑文档</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/backend/dot-net-mvc5/" class="prev router-link-active">
+        首页
+      </a></span> <span class="next"><a href="/backend/dot-net-mvc5/02asp-dot-net-mvc5.html">
+        表单和HTML辅助方法
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----><!----></div></div>
+    <script src="/assets/js/app.d58cb2a0.js" defer></script><script src="/assets/js/2.a2eaf130.js" defer></script><script src="/assets/js/11.dc0197f3.js" defer></script><script src="/assets/js/3.f31d052a.js" defer></script>
+  </body>
+</html>
